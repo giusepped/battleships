@@ -2,8 +2,22 @@ require_relative 'ship'
 
 class Board
 
-  def initalize
+  attr_reader :ship_positions, :boundaries
+
+  BOUNDARIES = 10
+
+  def initialize(boundaries=BOUNDARIES)
     @ship_positions = []
+    @boundaries = boundaries
+    @ships = {}
+  end
+
+  def place_ship(ship, cell, direction)
+    positions = define_coordinates(ship, cell, direction)
+    check_boundaries(positions)
+    overlap(positions, @ship_positions)
+    @ship_positions << positions
+    @ships = 
   end
 
   def define_coordinates(ship, cell, direction)
@@ -24,6 +38,14 @@ class Board
       end
     end
     coordinates
+  end
+
+  def overlap(array1, array2)
+    fail 'There is an overlap' unless (array1&array2).empty?
+  end
+
+  def check_boundaries(array3)
+    fail 'Outside Boundaries' if array3.flatten.any? { |x| x >= boundaries || x < 0 }
   end
 
 end
