@@ -5,7 +5,7 @@ describe Board do
 
   it 'can define coordinates when given a ship, starting cell and direction' do
     cell = [0, 0]
-    expect(subject.define_coordinates(ship, cell, 'V')).to eq [[0,0], [1,0]]
+    expect(subject.define_coordinates(ship, cell, 'H')).to eq [[0,0], [0,1]]
   end
 
 end

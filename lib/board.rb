@@ -2,7 +2,12 @@ require_relative 'ship'
 
 class Board
 
+  def initalize
+    @ship_positions = []
+  end
+
   def define_coordinates(ship, cell, direction)
+    #we will refactor this later
     coordinates = [cell]
     x = cell[1]
     y = cell[0]
