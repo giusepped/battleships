@@ -17,20 +17,27 @@ describe Board do
   it 'checks if ships overlap' do
     subject.place_ship(ship, [0, 0], 'H')
     positions = [[0, 0], [1, 0]]
-    expect { subject.overlap(positions) }.to raise_error 'There is an overlap'
+    expect { subject.overlap(positions) }.to raise_error 'Invalid position'
   end
 
   it 'checks if ships go beyond board boundaries' do
     positions = [[-5, 9], [9, 9], [10, 9]]
-    expect { subject.check_boundaries(positions) }.to raise_error 'Outside Boundaries'
+    expect { subject.check_boundaries(positions) }.to raise_error 'Invalid position'
   end
 
   describe '#get_shot' do
     cells = [0, 0], [9, 9]
     it 'can get shot and, if hit, the hit is recorded' do
+      allow(ship).to receive(:get_hit)
       subject.place_ship(ship, cells[0], 'H')
       subject.get_shot(cells[0])
       expect(subject.hits).to eq [cells[0]]
+    end
+
+    it 'calls the get_hit method on the ship that has been hit' do
+      subject.place_ship(ship, cells[0], 'H')
+      expect(ship).to receive(:get_hit)
+      subject.get_shot(cells[0])
     end
 
     it 'can get shot and, if missed, the miss is recorded' do
