@@ -5,7 +5,7 @@ describe Board do
 
   it 'can define coordinates when given a ship, starting cell and direction' do
     cell = [0, 0]
-    expect(subject.define_coordinates(ship, cell, 'H')).to eq [[0, 0], [0, 1]]
+    expect(subject.define_coordinates(ship, cell, 'H')).to eq [[0, 0], [1, 0]]
   end
 
   it 'places ships on the board' do
@@ -25,6 +25,18 @@ describe Board do
     expect { subject.check_boundaries(positions) }.to raise_error 'Outside Boundaries'
   end
 
-  it 'gets a shoot from the player' do
+  describe '#get_shot' do
+    cells = [0, 0], [9, 9]
+    it 'can get shot and, if hit, the hit is recorded' do
+      subject.place_ship(ship, cells[0], 'H')
+      subject.get_shot(cells[0])
+      expect(subject.hits).to eq [cells[0]]
+    end
+
+    it 'can get shot and, if missed, the miss is recorded' do
+      subject.place_ship(ship, cells[0], 'H')
+      subject.get_shot(cells[1])
+      expect(subject.misses).to eq [cells[1]]
+    end
   end
 end
