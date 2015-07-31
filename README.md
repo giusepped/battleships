@@ -1,1 +1,1 @@
-New try to create a Battleship game from scratch using this week's learnings :) July the 30th, 2015. Giuseppe and Gaby
+This is an attempt at creating a battleships game that can be played on the terminal as part of a challenge during the Makersacademy course.
