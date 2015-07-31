@@ -14,7 +14,7 @@ class Ship
 	end
 
 	def sunk?
-		true if hit_counter == size
+		hit_counter == size
 	end
 
 end
